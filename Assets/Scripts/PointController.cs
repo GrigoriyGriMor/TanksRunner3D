@@ -12,4 +12,13 @@ public class PointController : MonoBehaviour
         if (GameController.Instance)
             GameController.Instance.UpdatePoint(1);
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<LevelController>())
+        {
+            transform.position = Vector3.zero;
+            gameObject.SetActive(false);
+        }
+    }
 }
