@@ -1,25 +1,15 @@
 fileFormatVersion: 2
-guid: a4fc4dadca9fec3478d108824cba3ac6
+guid: d39dc788d501e4c40adcc4bc2ed1a95a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -9112172920366980380
-    second: take
+      74: 3988895544919090202
+    second: Crash
   - first:
-      74: -3100369314251171874
-    second: Idle
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ItemAdds
-    second: {fileID: 2100000, guid: e97452063e5ca8b4d9c3eb2b960f5f8e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ItemMain
-    second: {fileID: 2100000, guid: c20cd4d165f17d3408b9246d11f8a3c2, type: 2}
+      74: -5252816984213320552
+    second: idle
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
