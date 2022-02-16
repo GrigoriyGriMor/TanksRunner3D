@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    private static LevelController instance;
+    public static LevelController Instance => instance;
+
+    [SerializeField] private PlayerController player;
+    
     [SerializeField] private GameObject mainGround;
     [SerializeField] private GameObject paralaksGround;
 
@@ -22,9 +27,11 @@ public class LevelController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         //greate pools
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             GameObject _go = Instantiate(pointObj, Vector3.zero, Quaternion.identity, mainGround.transform);
             _go.SetActive(false);
@@ -56,11 +63,39 @@ public class LevelController : MonoBehaviour
 
     [SerializeField] private float rotateSpeedMultiplay = 0.01f;
 
+    public void UpdateSpeed()
+    {
+        rotateSpeed += rotateSpeedMultiplay;
+        respawnTime -= rotateSpeedMultiplay;
+    }
+
+    private Coroutine rotateStopCoroutine;
+    public void DamageIn()
+    {
+        if (rotateStopCoroutine != null)
+            return; // StopCoroutine(rotateStopCoroutine);
+
+        rotateStopCoroutine = StartCoroutine(MoveTougch());
+    }
+
+    private IEnumerator MoveTougch()
+    {
+        float facktSpeed = rotateSpeed;
+        float facktPlayerSpeed = player.moveSpeed;
+
+        rotateSpeed = rotateSpeed / 3;
+        player.moveSpeed = player.moveSpeed / 3;
+
+        yield return new WaitForSeconds(0.8f);
+
+        rotateSpeed = facktSpeed;
+        player.moveSpeed = facktPlayerSpeed;
+        rotateStopCoroutine = null;
+    }
+
     public void FixedUpdate()
     {
-       // if (!GameController.Instance.gameIsPlayed) return;
-
-        rotateSpeed += rotateSpeedMultiplay * Time.deltaTime;
+        //if (!GameController.Instance.gameIsPlayed) return;
 
         mainGround.transform.Rotate(-rotateSpeed, 0, 0);
         paralaksGround.transform.Rotate(-rotateSpeed / 2, 0, 0);
