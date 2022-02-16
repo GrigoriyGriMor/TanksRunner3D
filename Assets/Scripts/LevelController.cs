@@ -67,7 +67,7 @@ public class LevelController : MonoBehaviour
     {
         rotateSpeed += rotateSpeedMultiplay;
         player.moveSpeed += player.moveSpeed * 0.01f;
-        respawnTime -= Mathf.Clamp(rotateSpeedMultiplay * 0.75f, 0.01f, 100);
+        respawnTime = Mathf.Clamp(respawnTime - rotateSpeedMultiplay * 0.75f, 0.01f, 100);
     }
 
     private Coroutine rotateStopCoroutine;
@@ -99,7 +99,7 @@ public class LevelController : MonoBehaviour
         //if (!GameController.Instance.gameIsPlayed) return;
 
         mainGround.transform.Rotate(-rotateSpeed, 0, 0);
-        paralaksGround.transform.Rotate(-rotateSpeed / 2, 0, 0);
+        paralaksGround.transform.Rotate(-rotateSpeed / 2.5f, 0, 0);
 
         if (timer < respawnTime)
             timer += Time.deltaTime;
