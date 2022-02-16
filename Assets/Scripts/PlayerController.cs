@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             case 0:
                 if (Vector3.Distance(transform.position, new Vector3(leftPos.position.x, transform.position.y, transform.position.z)) > 0.01f)
                 {
-                    transform.position = new Vector3(transform.position.x - moveSpeed, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(Mathf.Clamp(transform.position.x - moveSpeed, leftPos.position.x, transform.position.x), transform.position.y, transform.position.z);
                     playerVisual.transform.localEulerAngles = new Vector3(0, -moveAngle, 0);
                 }
                 else
@@ -85,12 +85,12 @@ public class PlayerController : MonoBehaviour
                 {
                     if (transform.position.x < centerPos.position.x)
                     {
-                        transform.position = new Vector3(transform.position.x + moveSpeed, transform.position.y, transform.position.z);
+                        transform.position = new Vector3(Mathf.Clamp(transform.position.x + moveSpeed, transform.position.x, centerPos.position.x), transform.position.y, transform.position.z);
                         playerVisual.transform.localEulerAngles = new Vector3(0, moveAngle, 0);
                     }
                     else
                     {
-                        transform.position = new Vector3(transform.position.x - moveSpeed, transform.position.y, transform.position.z);
+                        transform.position = new Vector3(Mathf.Clamp(transform.position.x - moveSpeed, centerPos.position.x, transform.position.x), transform.position.y, transform.position.z);
                         playerVisual.transform.localEulerAngles = new Vector3(0, -moveAngle, 0); 
                     }
                 }
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
             case 2:
                 if (Vector3.Distance(transform.position, new Vector3(rightPos.position.x, transform.position.y, transform.position.z)) > 0.01f)
                 {
-                    transform.position = new Vector3(transform.position.x + moveSpeed, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(Mathf.Clamp(transform.position.x + moveSpeed, transform.position.x, rightPos.position.x), transform.position.y, transform.position.z);
                     playerVisual.transform.localEulerAngles = new Vector3(0, moveAngle, 0); 
                 }
                 else

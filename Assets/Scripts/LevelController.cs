@@ -31,7 +31,7 @@ public class LevelController : MonoBehaviour
 
         //greate pools
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 25; i++)
         {
             GameObject _go = Instantiate(pointObj, Vector3.zero, Quaternion.identity, mainGround.transform);
             _go.SetActive(false);
@@ -66,7 +66,8 @@ public class LevelController : MonoBehaviour
     public void UpdateSpeed()
     {
         rotateSpeed += rotateSpeedMultiplay;
-        respawnTime -= rotateSpeedMultiplay;
+        player.moveSpeed += player.moveSpeed * 0.01f;
+        respawnTime -= Mathf.Clamp(rotateSpeedMultiplay * 0.75f, 0.01f, 100);
     }
 
     private Coroutine rotateStopCoroutine;
@@ -83,10 +84,10 @@ public class LevelController : MonoBehaviour
         float facktSpeed = rotateSpeed;
         float facktPlayerSpeed = player.moveSpeed;
 
-        rotateSpeed = rotateSpeed / 3;
-        player.moveSpeed = player.moveSpeed / 3;
+        rotateSpeed = rotateSpeed / 2f;
+        player.moveSpeed = player.moveSpeed / 2f;
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.25f);
 
         rotateSpeed = facktSpeed;
         player.moveSpeed = facktPlayerSpeed;
