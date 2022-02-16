@@ -9,7 +9,17 @@ ModelImporter:
   - first:
       74: -3100369314251171874
     second: Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ItemAdds
+    second: {fileID: 2100000, guid: e97452063e5ca8b4d9c3eb2b960f5f8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ItemMain
+    second: {fileID: 2100000, guid: c20cd4d165f17d3408b9246d11f8a3c2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
