@@ -56,7 +56,10 @@ public class GameController : MonoBehaviour
 
         if (winGamePanel != null) winGamePanel.SetActive(false);
         if (loseGamePanel != null) loseGamePanel.SetActive(false);
+    }
 
+    private void Start()
+    {
         if (SoundManagerAllControll.Instance && backgroundClip)
         {
             SoundManagerAllControll.Instance.BackgroundClipPlay(backgroundClip);
