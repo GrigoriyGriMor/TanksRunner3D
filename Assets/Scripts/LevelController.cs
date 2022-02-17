@@ -96,7 +96,7 @@ public class LevelController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        //if (!GameController.Instance.gameIsPlayed) return;
+        if (!GameController.Instance.gameIsPlayed) return;
 
         mainGround.transform.Rotate(-rotateSpeed, 0, 0);
         paralaksGround.transform.Rotate(-rotateSpeed / 2.5f, 0, 0);

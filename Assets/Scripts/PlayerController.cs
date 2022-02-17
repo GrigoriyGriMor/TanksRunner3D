@@ -21,21 +21,21 @@ public class PlayerController : MonoBehaviour
 
     public void InputStart()
     {
-#if UNITY_ANDROID || UNITY_IOS
-        startInputPos = Touchscreen.current.position.ReadValue();
-#else
-        startInputPos = Mouse.current.position.ReadValue();
-#endif
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            startInputPos = Mouse.current.position.ReadValue();
+        else
+            startInputPos = Touchscreen.current.position.ReadValue();
+
     }
 
     public void InputEnd()
     {
         Vector2 newVector = Vector2.zero;
-#if UNITY_ANDROID || UNITY_IOS
-        newVector = Touchscreen.current.position.ReadValue();
-#else
-        newVector = Mouse.current.position.ReadValue();
-#endif
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            newVector = Mouse.current.position.ReadValue();
+        else
+            newVector = Touchscreen.current.position.ReadValue();
 
         if (newVector.x < startInputPos.x)
         {
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!GameController.Instance.gameIsPlayed) return;
+        if (!GameController.Instance.gameIsPlayed) return;
 
         switch (currentPos)
         {

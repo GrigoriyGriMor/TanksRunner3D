@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip backgroundClip;
     [SerializeField] private AudioClip pointUpdateAudio;
     [SerializeField] private AudioClip damageAudio;
+    [SerializeField] private AudioClip trackAudio;
 
     [Header("ID следующего уровня")]
     [SerializeField] private int nextLevelID = 0;
@@ -56,13 +57,18 @@ public class GameController : MonoBehaviour
         if (winGamePanel != null) winGamePanel.SetActive(false);
         if (loseGamePanel != null) loseGamePanel.SetActive(false);
 
-        if (SoundManagerAllControll.Instance && backgroundClip) SoundManagerAllControll.Instance.BackgroundClipPlay(backgroundClip);
+        if (SoundManagerAllControll.Instance && backgroundClip)
+        {
+            SoundManagerAllControll.Instance.BackgroundClipPlay(backgroundClip);
+            SoundManagerAllControll.Instance.ClipLoopAndPlay(trackAudio);
+        }
     }
 
+    [SerializeField] private Color deactiveHealColor = new Color();
     public void SetDamage()
     {
         healCount -= 1;
-        HealVisual[healCount].sprite = offHealSprite;
+        HealVisual[healCount].color = deactiveHealColor;
 
         if (SoundManagerAllControll.Instance && damageAudio != null) SoundManagerAllControll.Instance.ClipPlay(damageAudio);
 
@@ -87,6 +93,27 @@ public class GameController : MonoBehaviour
 
     public void GameStarted()
     {
+        StartCoroutine(StartGameCoroutine());
+       /* gameIsPlayed = true;
+
+        if (startLevelPanel != null) startLevelPanel.SetActive(false);
+        if (GamePlayedPanels.Length > 0)
+            for (int i = 0; i < GamePlayedPanels.Length; i++)
+                GamePlayedPanels[i].SetActive(true);
+
+        if (PointText != null) PointText.text = "0";
+        pointValue = 0;
+
+        gameStarted.Invoke();*/
+    }
+
+    [SerializeField] private Animator uiAnim;
+    private IEnumerator StartGameCoroutine()
+    {
+        if (uiAnim != null) uiAnim.SetTrigger("Start");
+
+        yield return new WaitForSeconds(0.5f);
+
         gameIsPlayed = true;
 
         if (startLevelPanel != null) startLevelPanel.SetActive(false);
